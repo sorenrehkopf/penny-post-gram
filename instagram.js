@@ -24,13 +24,15 @@ router.get('/authorize-user', function (req, res) {
   res.redirect(instaApi.get_authorization_url(redirect_uri));
 });
 
-/* Set cookie once Instagram send access code */
+/* Set cookie once Instagram sends access code */
 router.get('/handleauth', function (req, res) {
+
   instaApi.authorize_user(req.query.code, redirect_uri, function(err, result) {
+    console.log("RESULT:", result);
     if (err) {
       console.log(err.body);
     } else {
-      res.cookie('instaToken',result.access_token, { maxAge: 900000, httpOnly: true });
+      res.cookie('instaToken',result.access_token, { maxAge: 90000, httpOnly: true });
       res.redirect('/');
     }
   });
@@ -41,9 +43,11 @@ router.get('/', function (req, res) {
 
   var instaToken = req.cookies.instaToken;
 
+  console.log(req.cookies.instaToken)
+
   if (req.cookies.instaToken) {
     instaApi.use({ access_token: instaToken });
-    return instaApi.user_self_media_recentAsync(50)
+    return instaApi.user_self_media_recentAsync(10)
     .spread(function (medias, pagination, remaining, limit) {
 
       return Bluebird.all([
@@ -68,6 +72,11 @@ router.get('/', function (req, res) {
   } else {
     res.render('index', { title: 'Instagram + Lob' });
   }
+});
+
+router.get('/logout', function(req, res) {
+  res.cookie('instaToken', null, { maxAge: 1, httpOnly: true });
+  res.redirect('/');
 });
 
   /* Create Postcard and pay with Stripe  */
