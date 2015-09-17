@@ -28,7 +28,7 @@ router.get('/authorize-user', function (req, res) {
 router.get('/handleauth', function (req, res) {
 
   instaApi.authorize_user(req.query.code, redirect_uri, function(err, result) {
-    console.log("RESULT:", result);
+    // console.log("RESULT:", result);
     if (err) {
       console.log(err.body);
     } else {
@@ -43,7 +43,7 @@ router.get('/', function (req, res) {
 
   var instaToken = req.cookies.instaToken;
 
-  console.log(req.cookies.instaToken)
+  // console.log(req.cookies.instaToken)
 
   if (req.cookies.instaToken) {
     instaApi.use({ access_token: instaToken });

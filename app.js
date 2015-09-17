@@ -33,9 +33,10 @@ if (app.get('env') === 'development') {
   });
 }
 
-app.set('port', process.env.PORT || 3000);
-var server = app.listen(app.get('port'), function() {
-  console.log('listening to the smooth sounds of ' + server.address().port);
-});
+// app.set('port', process.env.PORT || 3000);
+// var server = app.listen(app.get('port'), function() {
+//   console.log('listening to the smooth sounds of ' + server.address().port);
+// });
+app.listen(process.env.PORT || 3000)
 
 module.exports = app;
