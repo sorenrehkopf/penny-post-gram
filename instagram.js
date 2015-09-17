@@ -11,8 +11,11 @@ var stripe        = require("stripe")(process.env.stripe_key);
 
 Bluebird.promisifyAll(instaApi);
 
+var NODE_ENV = process.env.NODE_ENV || 'development';
+var redirect_uri =  (NODE_ENV === 'production') ? 'https://pennypost.herokuapp.com/handleauth' : 'http://localhost:3000/handleauth';
 
-var redirect_uri = 'http://localhost:3000/handleauth';
+
+// var redirect_uri = |'';
 var instaCredentials = {
   client_id: process.env.instagram_client_id,
   client_secret: process.env.instagram_client_secret
