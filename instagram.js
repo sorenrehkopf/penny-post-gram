@@ -14,7 +14,7 @@ Bluebird.promisifyAll(instaApi);
 var NODE_ENV = process.env.NODE_ENV || 'development';
 var redirect_uri =  (NODE_ENV === 'production') ? 'https://pennypost.herokuapp.com/handleauth' : 'http://localhost:3000/handleauth';
 
-
+// yyo
 // var redirect_uri = |'';
 var instaCredentials = {
   client_id: process.env.instagram_client_id,
