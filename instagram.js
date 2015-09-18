@@ -54,8 +54,8 @@ router.get('/', function (req, res) {
 
       return Bluebird.all([
         instaApi.mediaAsync(medias[Math.floor(Math.random() * medias.length -1) + 1].id),
-        instaApi.mediaAsync(medias[Math.floor(Math.random() * medias.length -1) + 2].id),
-        instaApi.mediaAsync(medias[Math.floor(Math.random() * medias.length -1) + 3].id)
+        instaApi.mediaAsync(medias[Math.floor(Math.random() * medias.length -1) + 1].id),
+        instaApi.mediaAsync(medias[Math.floor(Math.random() * medias.length -1) + 1].id)
       ]);
     })
     .spread(function (image1, image2, image3) {
