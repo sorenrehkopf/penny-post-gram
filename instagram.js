@@ -8,7 +8,6 @@ var Lob           = require('lob')(process.env.lob_api_key);
 var request       = require('request');
 var stripe        = require("stripe")(process.env.stripe_key);
 
-
 Bluebird.promisifyAll(instaApi);
 
 var NODE_ENV = process.env.NODE_ENV || 'development';
@@ -35,7 +34,7 @@ router.get('/handleauth', function (req, res) {
     if (err) {
       console.log(err.body);
     } else {
-      res.cookie('instaToken',result.access_token, { maxAge: 90000, httpOnly: true });
+      res.cookie('instaToken',result.access_token, { httpOnly: true }); //maxAge: 90000,
       res.redirect('/');
     }
   });
@@ -60,13 +59,24 @@ router.get('/', function (req, res) {
       ]);
     })
     .spread(function (image1, image2, image3) {
-      res.render('insta', {
-        title: 'Send this Postcard',
-        image1: image1[0].images.standard_resolution.url,
-        image2: image2[0].images.standard_resolution.url,
-        image3: image3[0].images.standard_resolution.url,
-        access_token: instaToken,
-        stripeKey: process.env.stripe_publish_key
+      res.format({
+        json: function(){
+          res.send({
+            image1: image1[0].images.standard_resolution.url,
+            image2: image2[0].images.standard_resolution.url,
+            image3: image3[0].images.standard_resolution.url,
+          });
+        },
+        html: function(){
+          res.render('insta', {
+            title: 'Send this Postcard',
+            image1: image1[0].images.standard_resolution.url,
+            image2: image2[0].images.standard_resolution.url,
+            image3: image3[0].images.standard_resolution.url,
+            access_token: instaToken,
+            stripeKey: process.env.stripe_publish_key
+          });
+        }
       });
     })
     .catch(function (errors) {
@@ -86,17 +96,18 @@ router.get('/logout', function(req, res) {
 router.post('/', function(req, res) {
   var stripeToken = req.body.stripeToken;
 
-  stripe.setApiKey(process.env.stripe_key);
+  // stripe.setApiKey(process.env.stripe_key);
   var charge = stripe.charges.create({
     amount: 0500, // amount in cents
     currency: "usd",
     card: stripeToken,
-    description: "Example Charge"
+    description: "Penny Postcard",
+    capture: false
   }, function(err, charge) {
     console.log(err);
     console.log(charge);
     if (err && err.type === 'StripeCardError') {
-
+      return res.render('complete', { error: 'Credit card declined.' });
     }else{
       var postcardTemplate = fs.readFileSync(__dirname + '/views/postcard.html').toString();
       return Lob.postcards.create({
@@ -119,11 +130,20 @@ router.post('/', function(req, res) {
       })
       .then(function (results) {
         console.log(results);
-        res.render('complete', {
-          url: results.url
-        });
+        stripe.charges.capture(charge.id, function(err, charge) {
+            console.log(err);
+            console.log(charge);
+            if (err && err.type === 'StripeCardError') {
+              return res.render('complete', { error: 'Credit card declined, but enjoy your free postcard.' });
+            }else{
+              res.render('complete', {
+                url: results.url
+              });
+            }
+          });
       })
       .catch(function (errors){
+        // res.send(req.body);
         res.render('complete', { error: errors.message });
       });
     }

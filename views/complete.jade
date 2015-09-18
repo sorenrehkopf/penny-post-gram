@@ -6,9 +6,9 @@ block content
       if error
         div.alert.alert-danger
           p error - please fill out All of your postcard!
+        a.btn.btn-primary(href="javascript:history.back()") &larr; go back
       else
         div.alert.alert-success
           p Success! Your postcard has been created. You can see a preview here:
             a(href=url, target="_blank")= url
-
-      a.btn.btn-primary(href="/") Create Another Postcard
+        a.btn.btn-primary(href="/") Create Another Postcard

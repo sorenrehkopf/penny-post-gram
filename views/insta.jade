@@ -10,16 +10,17 @@ block content
         img(src= image3, width="250px", class='image3')
       div.text-center
         br
-        a.btn.btn-success(href="/") Change Photos
+        a.btn.btn-success#change-photos(href="#") Change Photos
 
     div.col-md-6
       h1 Create
-      form(action="", method="POST")
+      form(data-toggle="validator", role="form", method="POST")
         div(class="form-group col-md-12")
-          label Name
-          input(
-            type="text"
-            class="form-control"
+          label.control-label(for="inputName") Name
+          input#inputName.form-control(
+            type="text",
+            class="form-control",
+            placeholder="Nathan Maas",
             name="name"
           )
         div(class="form-group col-md-12")
@@ -57,9 +58,9 @@ block content
             name="message"
           )
         div(class="form-group col-md-12")
-          input(type="hidden", value=image1, name="image1")
-          input(type="hidden", value=image2, name="image2")
-          input(type="hidden", value=image3, name="image3")
+          input(type="hidden", value=image1, name="image1", id="image-input1")
+          input(type="hidden", value=image2, name="image2", id="image-input2")
+          input(type="hidden", value=image3, name="image3", id="image-input3")
           script.stripe-button(src="https://checkout.stripe.com/checkout.js",
                                 data-key=stripeKey,
                                 data-amount="0500",
