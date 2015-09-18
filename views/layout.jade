@@ -8,9 +8,9 @@ html
     script(type="text/javascript", src="http://cdnjs.cloudflare.com/ajax/libs/jquery.bootstrapvalidator/0.5.3/js/bootstrapValidator.min.js")
     script(src="/js/main.js")
     link(rel="stylesheet", href="http://cdnjs.cloudflare.com/ajax/libs/jquery.bootstrapvalidator/0.5.3/css/bootstrapValidator.min.css")
-    link(rel='stylesheet', href='./stylesheets/style.css')
     link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css')
     link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js')
+    link(rel='stylesheet', href='./stylesheets/style.css')
 
   body
     nav.navbar.navbar-default
@@ -22,14 +22,14 @@ html
           span.icon-bar
           span.icon-bar
           span.icon-bar
-        a.navbar-brand(href="/") Penny-Post
+        a.navbar-brand.color(href="/") Penny-Post
 
       #bs-example-navbar-collapse-1.collapse.navbar-collapse
         ul.nav.navbar-nav.navbar-right
           li
-            a(href="/logout") Logout
-          li
-            a(href="/about")  About
+            a.navbar-nav(href="/logout") Logout
+          //- li
+          //-   a(href="/about")  About
 
 
     div.container

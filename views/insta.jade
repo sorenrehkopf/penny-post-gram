@@ -1,73 +1,74 @@
 extends layout
 
 block content
-  div.row
-    div.col-md-6
-      h1 Preview
-      div.postcard-preview.clearfix
-        img(src= image1, width="250px", class='image1')
-        img(src= image2, width="250px", class='image2')
-        img(src= image3, width="250px", class='image3')
-      div.text-center
-        br
-        a.btn.btn-success#change-photos(href="#") Change Photos
+  body.matte
+    div.row
+      div.col-md-6
+        h1 Preview
+        div.postcard-preview.clearfix
+          img(src= image1, width="250px", class='image1')
+          img(src= image2, width="250px", class='image2')
+          img(src= image3, width="250px", class='image3')
+        div.text-center
+          br
+          a.btn.btn-success#change-photos(href="#") Change Photos
 
-    div.col-md-6
-      h1 Create
-      form(data-toggle="validator", role="form", method="POST")
-        div(class="form-group col-md-12")
-          label.control-label(for="inputName") Name
-          input#inputName.form-control(
-            type="text",
-            class="form-control",
-            placeholder="Nathan Maas",
-            name="name"
-          )
-        div(class="form-group col-md-12")
-          label Address
-          input(
-            type="text"
-            class="form-control"
-            name="address"
-          )
-        div(class="form-group col-md-4")
-          label City
-          input(
-            type="text"
-            class="form-control"
-            name="city"
-          )
-        div(class="form-group col-md-4")
-          label State
-          input(
-            type="text"
-            class="form-control"
-            name="state"
-          )
-        div(class="form-group col-md-4")
-          label Zip
-          input(
-            type="text"
-            class="form-control"
-            name="zip"
-          )
-        div(class="form-group col-md-12")
-          label Message
-          textarea(
-            class="form-control"
-            name="message"
-          )
-        div(class="form-group col-md-12")
-          input(type="hidden", value=image1, name="image1", id="image-input1")
-          input(type="hidden", value=image2, name="image2", id="image-input2")
-          input(type="hidden", value=image3, name="image3", id="image-input3")
-          script.stripe-button(src="https://checkout.stripe.com/checkout.js",
-                                data-key=stripeKey,
-                                data-amount="0500",
-                                data-name="Penny",
-                                data-description="($5.00) 1 postcard delivered (USA)",
-                                data-image="./stylesheets/images/penny_logo2.jpg",
-                                data-locale="auto")
+      div.col-md-6
+        h1 Create
+        form(data-toggle="validator", role="form", method="POST")
+          div(class="form-group col-md-12")
+            label.control-label(for="inputName") Name
+            input#inputName.form-control(
+              type="text",
+              class="form-control",
+              placeholder="Nathan Maas",
+              name="name"
+            )
+          div(class="form-group col-md-12")
+            label Address
+            input(
+              type="text"
+              class="form-control"
+              name="address"
+            )
+          div(class="form-group col-md-4")
+            label City
+            input(
+              type="text"
+              class="form-control"
+              name="city"
+            )
+          div(class="form-group col-md-4")
+            label State
+            input(
+              type="text"
+              class="form-control"
+              name="state"
+            )
+          div(class="form-group col-md-4")
+            label Zip
+            input(
+              type="text"
+              class="form-control"
+              name="zip"
+            )
+          div(class="form-group col-md-12")
+            label Message
+            textarea(
+              class="form-control"
+              name="message"
+            )
+          div(class="form-group col-md-12")
+            input(type="hidden", value=image1, name="image1", id="image-input1")
+            input(type="hidden", value=image2, name="image2", id="image-input2")
+            input(type="hidden", value=image3, name="image3", id="image-input3")
+            script.stripe-button(src="https://checkout.stripe.com/checkout.js",
+                                  data-key=stripeKey,
+                                  data-amount="0500",
+                                  data-name="Penny",
+                                  data-description="($5.00) 1 postcard delivered (USA)",
+                                  data-image="./stylesheets/images/penny_logo2.jpg",
+                                  data-locale="auto")
 
 
 

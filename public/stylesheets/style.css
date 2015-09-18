@@ -1,15 +1,61 @@
 
+.intro{
+  font-size: 55px;
+  color: white;
+  font-family: arial;
+  font-style: bold;
+}
+
+.bridge{
+  background-image: url('http://data.whicdn.com/images/55640556/original.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.matte{
+  background-image: url(' http://www.warrelics.eu/forum/attachments/photos-papers-propaganda-third-reich/695937d1401247424-waffen-ss-family-photo-original-post-war-copy-img_20140527_0019_new.jpg');
+  background-color: rgba(300, 300, 300, .1);
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.navbar.navbar-default{
+  background-color: white;
+  opacity: .8;
+}
+
+.navbar-brand.color{
+  color: #218CDC;
+  font-family: arial;
+  font-size: 25px;
+  margin-top: 10px;
+  margin-left: 20px;
+}
+
+.navbar-nav{
+  color: red;
+  margin-top: 5px;
+  margin-right: 20px;
+}
 
 #login_btn{
-margin-top: 100px;
+  margin-top: 70px;
 }
 
 .intro{
   margin-top: 200px;
 }
 
+.stripe-button-el{
+  margin-left: 200px;
+}
+
+.form-group{
+  margin-top: 16px;
+}
+
 .postcard-preview {
-  border: 2px solid #ccc; padding: 10px; position: relative;
+  border: 2px solid #218CDC; padding: 10px; position: relative;
 }
 .postcard-preview .image1 {
   width: 66%; float: left;
