@@ -134,7 +134,7 @@ router.post('/', function(req, res) {
             console.log(err);
             console.log(charge);
             if (err && err.type === 'StripeCardError') {
-              return res.render('complete', { error: 'Credit card declined, but enjoy your free postcard.' });
+              return res.render('complete', { error: 'There was an isssue prossessing your card.' });
             }else{
               res.render('complete', {
                 url: results.url
